@@ -1,0 +1,122 @@
+body {
+  font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
+}
+
+#app {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#gamecontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+  width: 70%;
+}
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 30px;
+  height: 90%;
+  width: 20%;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  font-size: 30px;
+  width: 100%;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  height: 100%;
+  width: 100%;
+  background-image: url("http://wars175x.narod.ru/wargameprint/img_ext/grass013.jpg");
+}
+
+.row {
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  height: 100%;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.ship {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.shipBody {
+  background-color: black;
+  border: 'solid black 1px';
+  height: 50%;
+  width: 50%;
+}
+
+.shipGun {
+  position: absolute;
+  background-color: black;
+  height: 50%;
+  width: 10%;
+  top: -20%;
+}
+
+.laser {
+  position: relative;
+  background-color: black;
+  border: 'solid black 1px';
+  height: 25%;
+  width: 25%;
+  border-radius: 50%;
+}
+
+.wall {
+  height: 100%;
+  width: 100%;
+  background-color: gray;
+}
+
+.enemy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.enemyimg {
+  max-height: 80%;
+  max-width: 60%;
+}
+
+.buttonpad {
+  padding: 10px;
+}
+
+button {
+  font-size: 20px;
+  margin: 10px;
+}
