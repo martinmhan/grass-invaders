@@ -44,6 +44,7 @@ body {
   height: 100%;
   width: 100%;
   background-image: url("http://wars175x.narod.ru/wargameprint/img_ext/grass013.jpg");
+  background-size: cover;
 }
 
 .row {
@@ -69,19 +70,9 @@ body {
   width: 100%;
 }
 
-.shipBody {
-  background-color: black;
-  border: 'solid black 1px';
-  height: 50%;
-  width: 50%;
-}
-
-.shipGun {
-  position: absolute;
-  background-color: black;
-  height: 50%;
-  width: 10%;
-  top: -20%;
+.shipimg {
+  max-height: 80%;
+  max-width: 60%;
 }
 
 .laser {
@@ -108,6 +99,11 @@ body {
 }
 
 .enemyimg {
+  max-height: 80%;
+  max-width: 60%;
+}
+
+.explosionimg {
   max-height: 80%;
   max-width: 60%;
 }

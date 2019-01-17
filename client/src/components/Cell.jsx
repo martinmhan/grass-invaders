@@ -15,7 +15,7 @@ const Cell = (props) => {
   const item = props.gridMatrix[props.row] ? props.gridMatrix[props.row][props.col] : null;
 
   return (
-    <div className="cell">
+    <div className="cell" id={`r${props.row}c${props.col}`}>
       {map[item]}
     </div>
   );

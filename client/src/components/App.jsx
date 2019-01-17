@@ -3,6 +3,7 @@ import Scoreboard from './Scoreboard.jsx';
 import Grid from './Grid.jsx';
 import ButtonPad from './ButtonPad.jsx';
 import Sidebar from './Sidebar.jsx';
+import Explosion from './Explosion.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -13,35 +14,42 @@ class App extends Component {
     this.msBetweenLasers = 250;
     this.laserSpeed = 40;
     this.addEnemyIntervalms = 750;
-    this.addEnemyInterval = null;
     this.moveEnemiesIntervalms = 750;
+    this.addEnemyInterval = null;
     this.moveEnemiesInterval = null;
     this.state = {
+      gameStarted: false,
       score: 0,
       gridMatrix: [],
       shipRow: null,
       shipCol: null,
-      lastEnemyMove: null,
     };
   }
 
   componentWillMount = () => {
-    this.resetGrid();
+    this.resetGame();
   };
 
   startGame = () => {
-    this.addEnemyInterval = setInterval(this.addEnemy, this.addEnemyIntervalms);
-    this.moveEnemiesInterval = setInterval(this.moveEnemies, this.moveEnemiesIntervalms);
+    if (!this.state.gameStarted) {
+      this.addEnemyInterval = setInterval(this.addEnemy, this.addEnemyIntervalms);
+      this.moveEnemiesInterval = setInterval(this.moveEnemies, this.moveEnemiesIntervalms);
+      this.setState({ gameStarted: true });
+    }
   };
 
   endGame = () => {
     clearInterval(this.addEnemyInterval);
     clearInterval(this.moveEnemiesInterval);
-    this.resetGrid();
+    this.resetGame();
   };
 
-  resetGrid = () => {
-    const gridMatrix = [], shipRow = this.rows - 2, shipCol = Math.floor(this.cols / 2);
+  resetGame = () => {
+    let gridMatrix = [];
+    let shipRow = this.rows - 2; 
+    let shipCol = Math.floor(this.cols / 2);
+    let score = 0;
+
     for (let i = 0; i < this.rows; i++) {
       const row = [];
       for (let j = 0; j < this.cols; j ++) {
@@ -52,7 +60,7 @@ class App extends Component {
       gridMatrix.push(row);
     }
 
-    this.setState({ gridMatrix, shipRow, shipCol });
+    this.setState({ gridMatrix, shipRow, shipCol, score, gameStarted: false });
   }
 
   handleKeyDown = (e) => {
@@ -80,7 +88,7 @@ class App extends Component {
       this.setState({ gridMatrix, shipRow: newRow, shipCol: newCol });
     } else if (gridMatrix[newRow][newCol] === 'enemy') {
       this.endGame();
-      alert('game over'); // fix game over message
+      console.log('game over'); // fix game over message
     }
   };
 
@@ -101,6 +109,11 @@ class App extends Component {
       } else {
         if (nextCell === 'enemy') {
           gridMatrix[laserRow - 1][laserCol] = null;
+          // add explosion image if laser hits an enemy
+          // document.getElementById(`r${laserRow - 1}c${laserCol}`).appendChild(Explosion()); 
+          // setTimeout(() => {
+          //   console.log('remove explosion');
+          // }, 0);
           let score = this.state.score + 10;
           this.setState({ score });
         }
@@ -112,9 +125,9 @@ class App extends Component {
 
     moveLaser();
   };
-  
+
   addEnemy = () => {
-    let row = Math.floor(Math.random() * (3 - 1 - 1)) + 1;
+    let row = Math.floor(Math.random() * (2)) + 1;
     let col = Math.floor(Math.random() * (this.cols - 1 - 1)) + 1;
 
     while (this.state.gridMatrix[row][col]) {
@@ -143,7 +156,7 @@ class App extends Component {
             gridMatrix[newRow][newCol] = 'enemy';
           } else if (this.state.gridMatrix[newRow][newCol] === 'ship') { // if next spot is the ship, game over
             this.endGame();
-            alert('game over!'); // fix game over message
+            console.log('game over!'); // fix game over message
           }
         }
       }
