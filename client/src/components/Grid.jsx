@@ -1,5 +1,7 @@
 import React from 'react';
 import Row from './Row.jsx';
+import IntroModal from './IntroModal.jsx';
+import GameOverModal from './GameOverModal.jsx';
 
 const Grid = (props) => {
   const rows = [];
@@ -9,6 +11,11 @@ const Grid = (props) => {
   
   return (
     <div className="grid" tabIndex="0" onKeyDown={props.handleKeyDown}>
+      {
+        props.gameState === 'game over' ? <GameOverModal /> : 
+        props.gameState === 'intro' ? <IntroModal gotIt={props.gotIt} /> :
+        null
+      }
       {rows.map((row) => (
         <Row 
           gridMatrix={props.gridMatrix}

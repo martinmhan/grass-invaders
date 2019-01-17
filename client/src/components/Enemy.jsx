@@ -2,7 +2,7 @@ import React from 'react';
 
 const Enemy = (props) => (
   <div className="enemy">
-    <img className="enemyimg img" src="https://t5.rbxcdn.com/c85efbbe8461b897b0cb4768e3b00b85" />
+    <img className="enemyimg img" src="https://s3-us-west-1.amazonaws.com/gitbuckets/grass-invaders/earth-invaders-enemy.png" />
   </div>
 );
 

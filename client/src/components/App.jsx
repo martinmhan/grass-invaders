@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Scoreboard from './Scoreboard.jsx';
 import Grid from './Grid.jsx';
 import ButtonPad from './ButtonPad.jsx';
-import Sidebar from './Sidebar.jsx';
 import Explosion from './Explosion.jsx';
 
 class App extends Component {
@@ -18,7 +17,7 @@ class App extends Component {
     this.addEnemyInterval = null;
     this.moveEnemiesInterval = null;
     this.state = {
-      gameStarted: false,
+      gameState: 'intro', // possible values = 'intro', 'pre-game', playing', 'game over' 
       score: 0,
       gridMatrix: [],
       shipRow: null,
@@ -31,22 +30,23 @@ class App extends Component {
   };
 
   startGame = () => {
-    if (!this.state.gameStarted) {
+    if (this.state.gameState !== 'playing') {
+      this.resetGame();
       this.addEnemyInterval = setInterval(this.addEnemy, this.addEnemyIntervalms);
       this.moveEnemiesInterval = setInterval(this.moveEnemies, this.moveEnemiesIntervalms);
-      this.setState({ gameStarted: true });
+      this.setState({ gameState: 'playing' });
     }
   };
 
   endGame = () => {
     clearInterval(this.addEnemyInterval);
     clearInterval(this.moveEnemiesInterval);
-    this.resetGame();
+    this.setState({ gameState: 'game over' });
   };
 
   resetGame = () => {
     let gridMatrix = [];
-    let shipRow = this.rows - 2; 
+    let shipRow = this.rows - 2;
     let shipCol = Math.floor(this.cols / 2);
     let score = 0;
 
@@ -60,20 +60,26 @@ class App extends Component {
       gridMatrix.push(row);
     }
 
-    this.setState({ gridMatrix, shipRow, shipCol, score, gameStarted: false });
+    this.setState({ gridMatrix, shipRow, shipCol, score, gameState: 'intro' });
   }
 
+  gotIt = () => {
+    this.setState({ gameState: 'pre-game' });
+  };
+
   handleKeyDown = (e) => {
-    e.preventDefault();
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+      e.preventDefault();
       this.moveShip(e.key);
     } else if (e.key === ' ') {
+      e.preventDefault();
       if (Date.now() < this.lastLaser + this.msBetweenLasers) { return; }
       else { this.shootLaser(); }
     }
   };
 
   moveShip = (directionKey) => {
+    if (this.state.gameState !== 'playing') { return; }
     let newRow = this.state.shipRow, newCol = this.state.shipCol;
     let gridMatrix = [...this.state.gridMatrix];
 
@@ -88,11 +94,11 @@ class App extends Component {
       this.setState({ gridMatrix, shipRow: newRow, shipCol: newCol });
     } else if (gridMatrix[newRow][newCol] === 'enemy') {
       this.endGame();
-      console.log('game over'); // fix game over message
     }
   };
 
   shootLaser = () => {
+    if (this.state.gameState !== 'playing') { return; }
     this.lastLaser = Date.now();
     let laserRow = this.state.shipRow, laserCol = this.state.shipCol;
 
@@ -107,7 +113,7 @@ class App extends Component {
         gridMatrix[--laserRow][laserCol] = 'laser'; // move laser up a row
         this.setState({ gridMatrix }, () => { setTimeout(moveLaser, 1000 / this.laserSpeed); }); // schedule laser to move up another row
       } else {
-        if (nextCell === 'enemy') {
+        if (nextCell === 'enemy') { // if laser hits an enemy, remove enemy from grid
           gridMatrix[laserRow - 1][laserCol] = null;
           // add explosion image if laser hits an enemy
           // document.getElementById(`r${laserRow - 1}c${laserCol}`).appendChild(Explosion()); 
@@ -146,17 +152,16 @@ class App extends Component {
       gridMatrix.push([...row]);
     }
 
-    for (let i = 1; i < this.rows - 1; i++) {
+    for (let i = 1; i < this.rows - 1; i++) { // iterate through all cells
       for (let j = 1; j < this.cols - 1; j++) {
-        if (this.state.gridMatrix[i][j] === 'enemy') {
-          let newRow = this.state.shipRow > i ? i + 1: i;
+        if (this.state.gridMatrix[i][j] === 'enemy') { // if cell contains an enemy, move enemy closer to ship
+          let newRow = this.state.shipRow > i ? i + 1: i - 1;
           let newCol = this.state.shipCol > j ? j + 1 : j - 1;
-          if (!this.state.gridMatrix[newRow][newCol]) { // if next spot is empty, move
+          if (!this.state.gridMatrix[newRow][newCol]) { // move enemy only if next spot
             gridMatrix[i][j] = null;
             gridMatrix[newRow][newCol] = 'enemy';
           } else if (this.state.gridMatrix[newRow][newCol] === 'ship') { // if next spot is the ship, game over
             this.endGame();
-            console.log('game over!'); // fix game over message
           }
         }
       }
@@ -168,16 +173,18 @@ class App extends Component {
   render = () => (
     <div id="app">
       <div id="gamecontainer">
+        <div className="titleheader">Grass Invaders</div>
         <Scoreboard score={this.state.score} />
         <Grid
           rows={this.rows}
           cols={this.cols}
-          gridMatrix={this.state.gridMatrix}
+          gotIt={this.gotIt}
           handleKeyDown={this.handleKeyDown}
+          gridMatrix={this.state.gridMatrix}
+          gameState={this.state.gameState}
         />
         <ButtonPad startGame={this.startGame} endGame={this.endGame} />
       </div>
-      <Sidebar />
     </div>
   );
 }
