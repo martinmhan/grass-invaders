@@ -12,8 +12,8 @@ class App extends Component {
     this.lastLaser = null;
     this.msBetweenLasers = 250;
     this.laserSpeed = 40;
-    this.addEnemyIntervalms = 750;
-    this.moveEnemiesIntervalms = 750;
+    this.addEnemyIntervalms = 1000;
+    this.moveEnemiesIntervalms = 300;
     this.addEnemyInterval = null;
     this.moveEnemiesInterval = null;
     this.state = {

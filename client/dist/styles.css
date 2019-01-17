@@ -43,7 +43,7 @@ body {
   align-items: stretch;
   height: 100%;
   width: 100%;
-  background-image: url("https://s3-us-west-1.amazonaws.com/gitbuckets/grass-invaders/grass.jpg");
+  background-image: url("https://s3-us-west-1.amazonaws.com/gitbuckets/grass-invaders/grass-background.jpg");
   background-size: cover;
   position: relative;
   border-radius: 5px;
