@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Wall = (props) => (
+const Wall = () => (
   <div className="wall"></div>
 );
 

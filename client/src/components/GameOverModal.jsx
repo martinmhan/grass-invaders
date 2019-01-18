@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GameOverModal = (props) => (
+const GameOverModal = () => (
   <div className="gameovermodal">
     <div className="gameovermodalcontent">
       Game Over!

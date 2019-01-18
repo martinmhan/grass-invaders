@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Laser = (props) => (
+const Laser = () => (
   <div className="laser">
   </div>
 );

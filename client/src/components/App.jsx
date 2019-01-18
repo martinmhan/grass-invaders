@@ -13,13 +13,13 @@ class App extends Component {
     this.lastLaser = null;
     this.msBetweenLasers = 250;
     this.laserSpeed = 40;
-    this.enemyLaserSpeed = 20;
+    this.enemyLaserSpeed = 15;
     this.addEnemyIntervalms = 1000;
     this.moveEnemiesIntervalms = 300;
     this.addEnemyInterval = null;
     this.moveEnemiesInterval = null;
     this.state = {
-      gameState: 'intro', // possible values = 'intro', 'pre-game', playing', 'game over' 
+      gameState: 'intro', // possible values --> 'intro', 'pre-game', playing', 'game over' 
       score: 0,
       gridMatrix: [],
       shipRow: null,
@@ -55,6 +55,8 @@ class App extends Component {
     for (let i = 0; i < this.rows; i++) {
       const row = [];
       for (let j = 0; j < this.cols; j ++) {
+        const cellDiv = document.getElementById(`r${i}c${j}`);
+        if (cellDiv) { ReactDOM.unmountComponentAtNode(cellDiv); }
         if (i === shipRow && j === shipCol) { row.push('ship'); }
         else if (i === 0 || j === 0 || i === this.rows - 1 || j === this.cols - 1) { row.push('wall'); }
         else { row.push(null); }
@@ -171,8 +173,6 @@ class App extends Component {
   };
 
   shootEnemyLaser = (row, col) => {
-    console.log('enemy laser fired');
-
     const moveEnemyLaser = () => {
       let nextCell = this.state.gridMatrix[row + 1][col];
       let gridMatrix = [...this.state.gridMatrix];
