@@ -6,7 +6,7 @@ body {
 #app {
   display: flex;
   justify-content: center;
-  background-color: peachpuff;
+  background-color: papayawhip;
   align-items: center;
   height: 100vh;
   width: 100%;
@@ -16,7 +16,7 @@ body {
 .titleheader {
   font-size: 40px;
   font-weight: bold;
-  margin: 20px;
+  margin: 10px;
 }
 
 #gamecontainer {

@@ -1,5 +1,5 @@
 {
-  "name": "earth-invaders",
+  "name": "grass-invaders",
   "version": "1.0.0",
   "description": "single player shooting game (React)",
   "main": "index.js",

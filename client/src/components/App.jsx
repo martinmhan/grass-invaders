@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import Scoreboard from './Scoreboard.jsx';
 import Grid from './Grid.jsx';
 import ButtonPad from './ButtonPad.jsx';
@@ -115,13 +116,10 @@ class App extends Component {
       } else {
         if (nextCell === 'enemy') { // if laser hits an enemy, remove enemy from grid
           gridMatrix[laserRow - 1][laserCol] = null;
-          // add explosion image if laser hits an enemy
-          // document.getElementById(`r${laserRow - 1}c${laserCol}`).appendChild(Explosion()); 
-          // setTimeout(() => {
-          //   console.log('remove explosion');
-          // }, 0);
-          let score = this.state.score + 10;
-          this.setState({ score });
+          const cellDiv = document.getElementById(`r${laserRow - 1}c${laserCol}`);
+          ReactDOM.render(<Explosion/>, cellDiv);
+          setTimeout(() => { ReactDOM.unmountComponentAtNode(cellDiv); }, 100);
+          this.setState({ gridMatrix, score: this.state.score + 10 });
         }
 
         gridMatrix[laserRow][laserCol] = null;
@@ -155,12 +153,12 @@ class App extends Component {
     for (let i = 1; i < this.rows - 1; i++) { // iterate through all cells
       for (let j = 1; j < this.cols - 1; j++) {
         if (this.state.gridMatrix[i][j] === 'enemy') { // if cell contains an enemy, move enemy closer to ship
-          let newRow = this.state.shipRow > i ? i + 1: i - 1;
-          let newCol = this.state.shipCol > j ? j + 1 : j - 1;
-          if (!this.state.gridMatrix[newRow][newCol]) { // move enemy only if next spot
+          let newRow = this.state.shipRow > i ? i + 1 : (this.state.shipRow < i ? i - 1 : i);
+          let newCol = this.state.shipCol > j ? j + 1 : (this.state.shipCol < j ? j - 1 : j);
+          if (!this.state.gridMatrix[newRow][newCol]) { // move enemy only if next spot is null
             gridMatrix[i][j] = null;
             gridMatrix[newRow][newCol] = 'enemy';
-          } else if (this.state.gridMatrix[newRow][newCol] === 'ship') { // if next spot is the ship, game over
+          } else if (this.state.gridMatrix[newRow][newCol] === 'ship') { // if an enemy hits a ship, end game
             this.endGame();
           }
         }
@@ -168,6 +166,10 @@ class App extends Component {
     }
 
     this.setState({ gridMatrix });
+  };
+
+  shootEnemyLaser = () => {
+    console.log('enemy laser fired');
   };
 
   render = () => (
