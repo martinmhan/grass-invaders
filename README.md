@@ -1,5 +1,8 @@
 # earth-invaders
-single player shooting game (React)
+single-player Space Invaders replica game built with React
 
-#notes
-add ability for enemies to shoot lasers
+# setup instructions
+  1) npm install
+  2) npm run build
+  3) npm start
+  4) Open 'http://localhost:3000' in Chrome browser
