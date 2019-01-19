@@ -12,10 +12,11 @@ class App extends Component {
     this.cols = 18;
     this.lastLaser = null;
     this.msBetweenLasers = 250;
-    this.laserSpeed = 40;
-    this.enemyLaserSpeed = 15;
-    this.addEnemyIntervalms = 1000;
-    this.moveEnemiesIntervalms = 300;
+    this.laserSpeed = 40; // 1 = square per second
+    this.enemyLaserSpeed = 15; // 1 = square per second
+    this.enemyLaserFrequency = 10; // % of enemy movements that fire a laser
+    this.addEnemyIntervalms = 1000; // ms between enemies are added to screen
+    this.moveEnemiesIntervalms = 300; // ms between enemy movements
     this.addEnemyInterval = null;
     this.moveEnemiesInterval = null;
     this.state = {
@@ -161,7 +162,7 @@ class App extends Component {
           if (!this.state.gridMatrix[newRow][newCol]) { // move enemy only if next spot is null
             gridMatrix[i][j] = null;
             gridMatrix[newRow][newCol] = 'enemy';
-            if (Math.random() < 0.1) { this.shootEnemyLaser(newRow, newCol); }
+            if (Math.random() < .01 * this.enemyLaserFrequency) { this.shootEnemyLaser(newRow, newCol); }
           } else if (this.state.gridMatrix[newRow][newCol] === 'ship') { // if an enemy hits a ship, end game
             this.endGame();
           }
