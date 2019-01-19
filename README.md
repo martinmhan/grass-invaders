@@ -1,4 +1,4 @@
-# earth-invaders
+# grass-invaders
 single-player Space Invaders replica game built with React
 
 # setup instructions
