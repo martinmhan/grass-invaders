@@ -19,10 +19,17 @@ class App extends Component {
     this.moveEnemiesIntervalms = 300; // ms between enemy movements
     this.addEnemyInterval = null;
     this.moveEnemiesInterval = null;
+    let grid = [];
+    for (let i = 0; i < this.rows; i += 1) {
+      let row = [];
+      for (let j = 0; j < this.cols; j += 1) { row.push(null); }
+      grid.push(row);
+    }
+
     this.state = {
       gameState: 'intro', // possible values --> 'intro', 'pre-game', playing', 'game over' 
       score: 0,
-      gridMatrix: [],
+      gridMatrix: grid,
       shipRow: null,
       shipCol: null,
     };
