@@ -13,7 +13,7 @@ class App extends Component {
     this.lastLaser = null;
     this.msBetweenLasers = 250;
     this.laserSpeed = 40; // 1 = square per second
-    this.enemyLaserSpeed = 15; // 1 = square per second
+    this.enemyLaserSpeed = 20; // 1 = square per second
     this.enemyLaserFrequency = 10; // % of enemy movements that fire a laser
     this.addEnemyIntervalms = 1000; // ms between enemies are added to screen
     this.moveEnemiesIntervalms = 300; // ms between enemy movements
@@ -100,12 +100,12 @@ class App extends Component {
     else if (directionKey === 'ArrowLeft') { newCol = Math.max(1, this.state.shipCol - 1); }
     else if (directionKey === 'ArrowRight') { newCol = Math.min( this.cols - 2, this.state.shipCol + 1); }
 
-    if (!gridMatrix[newRow][newCol]) {
+    if (!gridMatrix[newRow][newCol]) { // if new spot is empty, move ship
       gridMatrix[this.state.shipRow][this.state.shipCol] = null;
       gridMatrix[newRow][newCol] = 'ship';
       this.setState({ gridMatrix, shipRow: newRow, shipCol: newCol });
-    } else if (gridMatrix[newRow][newCol] === 'enemy') {
-      this.endGame();
+    } else if (gridMatrix[newRow][newCol] === 'enemy' || gridMatrix[newRow][newCol] === 'laser') {
+      this.endGame(); // if new spot is an enemy or laser, game over
     }
   };
 
@@ -118,7 +118,7 @@ class App extends Component {
       let gridMatrix = [...this.state.gridMatrix];
       let nextCell = this.state.gridMatrix[laserRow - 1][laserCol];
 
-      if (nextCell === null) { // if next cell is empty, move laser forward
+      if (nextCell === null) { // if next cell is empty or an enemy laser, move laser forward
         if (gridMatrix[laserRow][laserCol] !== 'ship') { // if current laser row/col is not a ship, remove from grid
           gridMatrix[laserRow][laserCol] = null;
         }
@@ -132,7 +132,7 @@ class App extends Component {
           setTimeout(() => { ReactDOM.unmountComponentAtNode(cellDiv); }, 100);
           this.setState({ gridMatrix, score: this.state.score + 10 });
         }
-
+        // note: ship and enemy lasers may or may not pass by each other
         gridMatrix[laserRow][laserCol] = null;
         this.setState({ gridMatrix });
       }
@@ -142,12 +142,12 @@ class App extends Component {
   };
 
   addEnemy = () => {
-    let row = Math.floor(Math.random() * (2)) + 1;
-    let col = Math.floor(Math.random() * (this.cols - 2)) + 1;
+    let row = Math.floor(Math.random() * (3 - 1)) + 1; // random row between 1 and 3
+    let col = Math.floor(Math.random() * (this.cols - 1) - 1) + 1; // random col between 1 and cols - 1
 
     while (this.state.gridMatrix[row][col]) {
-      row = Math.floor(Math.random() * (2)) + 1;
-      col = Math.floor(Math.random() * (this.cols - 2)) + 1;
+      row = Math.floor(Math.random() * (3 - 1)) + 1;
+      col = Math.floor(Math.random() * (this.cols - 1) - 1) + 1; 
     }
 
     let gridMatrix = [...this.state.gridMatrix];
@@ -185,7 +185,7 @@ class App extends Component {
       let nextCell = this.state.gridMatrix[row + 1][col];
       let gridMatrix = [...this.state.gridMatrix];
 
-      if (nextCell === null) {
+      if (nextCell === null || nextCell === 'laser') {
         if (gridMatrix[row][col] !== 'enemy') {
           gridMatrix[row][col] = null;
         }
