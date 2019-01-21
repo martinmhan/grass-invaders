@@ -12,11 +12,11 @@ class App extends Component {
     this.cols = 18;
     this.lastLaser = null;
     this.msBetweenLasers = 250;
-    this.laserSpeed = 40; // 1 = square per second
-    this.enemyLaserSpeed = 20; // 1 = square per second
-    this.enemyLaserFrequency = 10; // % of enemy movements that fire a laser
-    this.addEnemyIntervalms = 1000; // ms between enemies are added to screen
-    this.moveEnemiesIntervalms = 300; // ms between enemy movements
+    this.laserSpeed = 40; // 1 = 1 square per second
+    this.enemyLaserSpeed = 20; // 1 = 1 square per second
+    this.enemyLaserFrequency = 10; // % of enemy movements that result in a laser fired
+    this.addEnemyIntervalms = 1000; // ms between enemies being added to screen
+    this.moveEnemiesIntervalms = 325; // ms between enemy movements
     this.addEnemyInterval = null;
     this.moveEnemiesInterval = null;
     let grid = [];
@@ -156,10 +156,7 @@ class App extends Component {
   };
 
   moveEnemies = () => {
-    let gridMatrix = [];
-    for (let row of this.state.gridMatrix) {
-      gridMatrix.push([...row]);
-    }
+    let gridMatrix = this.state.gridMatrix.map(row => [...row]);
 
     for (let i = 1; i < this.rows - 1; i++) { // iterate through all cells
       for (let j = 1; j < this.cols - 1; j++) {
