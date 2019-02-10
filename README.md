@@ -4,6 +4,7 @@ This is a small side-project I built during my time at Hack Reactor using purely
 - GIF demo of gameplay: https://s3-us-west-1.amazonaws.com/gitbuckets/grass-invaders/gifs/grass_invaders.gif
 
 # Setup
+Run the following, then open 'localhost:3000' in the Chrome browser.
   ```
   npm install
   npm run build
