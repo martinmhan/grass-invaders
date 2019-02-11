@@ -73,7 +73,7 @@ class App extends Component {
     }
 
     this.setState({ gridMatrix, shipRow, shipCol, score, gameState: 'intro' });
-  }
+  };
 
   gotIt = () => {
     this.setState({ gameState: 'pre-game' });
