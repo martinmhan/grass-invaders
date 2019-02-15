@@ -1,5 +1,5 @@
 const { Client } = require('pg');
-const config = require('')
+const config = require('./dbConfig.js');
 
 const client = new Client(config);
 client.connect();
