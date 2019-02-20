@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import Scoreboard from './Scoreboard.jsx';
 import Grid from './Grid.jsx';
 import ButtonPad from './ButtonPad.jsx';
@@ -51,6 +52,7 @@ class App extends Component {
   endGame = () => {
     clearInterval(this.addEnemyInterval);
     clearInterval(this.moveEnemiesInterval);
+    // send post request with current score to DB
     this.setState({ gameState: 'game over' });
   };
 

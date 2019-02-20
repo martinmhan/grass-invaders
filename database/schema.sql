@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS grassinvaders;
 
 CREATE DATABASE grassinvaders;
 
-USE grassinvaders;
+\c grassinvaders;
 
 CREATE TABLE highscores (
   username VARCHAR(255),
