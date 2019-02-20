@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
-import Scoreboard from './Scoreboard.jsx';
-import Grid from './Grid.jsx';
-import ButtonPad from './ButtonPad.jsx';
-import Explosion from './Explosion.jsx';
+// import Axios from 'axios';
+import Scoreboard from './Scoreboard';
+import Grid from './Grid';
+import ButtonPad from './ButtonPad';
+import Explosion from './Explosion';
 
 class App extends Component {
   constructor(props) {
@@ -20,15 +20,16 @@ class App extends Component {
     this.moveEnemiesIntervalms = 325; // ms between enemy movements
     this.addEnemyInterval = null;
     this.moveEnemiesInterval = null;
-    let grid = [];
+    const grid = [];
     for (let i = 0; i < this.rows; i += 1) {
-      let row = [];
+      const row = [];
       for (let j = 0; j < this.cols; j += 1) { row.push(null); }
       grid.push(row);
     }
 
     this.state = {
-      gameState: 'intro', // possible values --> 'intro', 'pre-game', playing', 'game over' 
+      gameState: 'intro', // possible values --> 'intro', 'pre-game', playing', 'game over'
+      username: '',
       score: 0,
       gridMatrix: grid,
       shipRow: null,
@@ -36,12 +37,14 @@ class App extends Component {
     };
   }
 
-  componentWillMount = () => {
+  componentWillMount() {
     this.resetGame();
-  };
+  }
 
   startGame = () => {
-    if (this.state.gameState !== 'playing') {
+    const { gameState } = this.state;
+
+    if (gameState !== 'playing') {
       this.resetGame();
       this.addEnemyInterval = setInterval(this.addEnemy, this.addEnemyIntervalms);
       this.moveEnemiesInterval = setInterval(this.moveEnemies, this.moveEnemiesIntervalms);
@@ -52,24 +55,28 @@ class App extends Component {
   endGame = () => {
     clearInterval(this.addEnemyInterval);
     clearInterval(this.moveEnemiesInterval);
-    // send post request with current score to DB
+    // send Axios post request with current score to DB
     this.setState({ gameState: 'game over' });
   };
 
   resetGame = () => {
-    let gridMatrix = [];
-    let shipRow = this.rows - 2;
-    let shipCol = Math.floor(this.cols / 2);
-    let score = 0;
+    const gridMatrix = [];
+    const shipRow = this.rows - 2;
+    const shipCol = Math.floor(this.cols / 2);
+    const score = 0;
 
-    for (let i = 0; i < this.rows; i++) {
+    for (let i = 0; i < this.rows; i += 1) {
       const row = [];
-      for (let j = 0; j < this.cols; j ++) {
+      for (let j = 0; j < this.cols; j += 1) {
         const cellDiv = document.getElementById(`r${i}c${j}`);
         if (cellDiv) { ReactDOM.unmountComponentAtNode(cellDiv); }
-        if (i === shipRow && j === shipCol) { row.push('ship'); }
-        else if (i === 0 || j === 0 || i === this.rows - 1 || j === this.cols - 1) { row.push('wall'); }
-        else { row.push(null); }
+        if (i === shipRow && j === shipCol) {
+          row.push('ship');
+        } else if (i === 0 || j === 0 || i === this.rows - 1 || j === this.cols - 1) {
+          row.push('wall');
+        } else {
+          row.push(null);
+        }
       }
       gridMatrix.push(row);
     }
@@ -77,8 +84,12 @@ class App extends Component {
     this.setState({ gridMatrix, shipRow, shipCol, score, gameState: 'intro' });
   };
 
-  gotIt = () => {
-    this.setState({ gameState: 'pre-game' });
+  letsPlay = (username) => {
+    if (username.length > 0) {
+      this.setState({ username, gameState: 'pre-game' });
+    } else {
+      console.log('need a longer username');
+    }
   };
 
   handleKeyDown = (e) => {
@@ -87,8 +98,7 @@ class App extends Component {
       this.moveShip(e.key);
     } else if (e.key === ' ') {
       e.preventDefault();
-      if (Date.now() < this.lastLaser + this.msBetweenLasers) { return; }
-      else { this.shootLaser(); }
+      if (Date.now() >= this.lastLaser + this.msBetweenLasers) { this.shootLaser(); }
     }
   };
 
@@ -196,7 +206,7 @@ class App extends Component {
       } else {
         if (nextCell === 'ship') {
           const cellDiv = document.getElementById(`r${row + 1}c${col}`);
-          ReactDOM.render(<Explosion/>, cellDiv);
+          ReactDOM.render(<Explosion />, cellDiv);
           this.endGame();
         }
 
@@ -216,7 +226,7 @@ class App extends Component {
         <Grid
           rows={this.rows}
           cols={this.cols}
-          gotIt={this.gotIt}
+          letsPlay={this.letsPlay}
           handleKeyDown={this.handleKeyDown}
           gridMatrix={this.state.gridMatrix}
           gameState={this.state.gameState}

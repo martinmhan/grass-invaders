@@ -1,24 +1,30 @@
 import React from 'react';
-import Row from './Row.jsx';
-import IntroModal from './IntroModal.jsx';
-import GameOverModal from './GameOverModal.jsx';
+import PropTypes from 'prop-types';
+import Row from './Row';
+import IntroModal from './IntroModal';
+import GameOverModal from './GameOverModal';
 
-const Grid = (props) => (
+const Grid = props => (
   <div className="grid" tabIndex="0" onKeyDown={props.handleKeyDown}>
-    {
-      props.gameState === 'game over' ? <GameOverModal /> : 
-      props.gameState === 'intro' ? <IntroModal gotIt={props.gotIt} /> :
-      null
-    }
-    {props.gridMatrix.map((rowArr, row) => (
+    { props.gameState === 'game over' ? <GameOverModal /> : null }
+    { props.gameState === 'intro' ? <IntroModal letsPlay={props.letsPlay} /> : null }
+    { props.gridMatrix.map((rowArr, row) => (
       <Row
         cols={props.cols}
         rowArr={rowArr}
         row={row}
-        key={row}
+        key={Date.now()}
       />
     ))}
   </div>
 );
+
+Grid.propTypes = {
+  cols: PropTypes.number.isRequired,
+  letsPlay: PropTypes.func.isRequired,
+  handleKeyDown: PropTypes.func.isRequired,
+  gridMatrix: PropTypes.arrayOf(PropTypes.array).isRequired,
+  gameState: PropTypes.string.isRequired,
+};
 
 export default Grid;
