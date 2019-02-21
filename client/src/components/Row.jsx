@@ -1,17 +1,23 @@
 import React from 'react';
-import Cell from './Cell.jsx';
+import PropTypes from 'prop-types';
+import Cell from './Cell';
 
-const Row = (props) => (
+const Row = ({ rowArr, row }) => (
   <div className="row">
-    {props.rowArr.map((cell, col) => (
+    {rowArr.map((cell, col) => (
       <Cell
         cell={cell}
-        row={props.row}
+        row={row}
         col={col}
         key={col}
       />
     ))}
   </div>
 );
+
+Row.propTypes = {
+  rowArr: PropTypes.arrayOf(PropTypes.string).isRequired,
+  row: PropTypes.number.isRequired,
+};
 
 export default Row;

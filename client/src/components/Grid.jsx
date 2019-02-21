@@ -13,7 +13,7 @@ const Grid = props => (
         cols={props.cols}
         rowArr={rowArr}
         row={row}
-        key={Date.now()}
+        key={row}
       />
     ))}
   </div>
