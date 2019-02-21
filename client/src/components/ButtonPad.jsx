@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ButtonPad = (props) => (
+const ButtonPad = props => (
   <div className="buttonpad">
-    <button className="startgamebtn" onClick={props.startGame}>Start Game</button>
-    <button className="endgamebtn" onClick={props.endGame}>End Game</button>
+    <button type="button" className="startgamebtn" onClick={props.startGame}>Start Game</button>
+    <button type="button" className="endgamebtn" onClick={props.endGame}>End Game</button>
   </div>
 );
 
