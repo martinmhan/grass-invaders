@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Scoreboard = props => (
+const Score = props => (
   <div className="scoreboard">
     {`Score: ${props.score}`}
   </div>
 );
 
-Scoreboard.propTypes = {
+Score.propTypes = {
   score: PropTypes.number.isRequired,
 };
 
-export default Scoreboard;
+export default Score;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Axios from 'axios';
-import Scoreboard from './Scoreboard';
+import Score from './Score';
 import Grid from './Grid';
 import ButtonPad from './ButtonPad';
 import Explosion from './Explosion';
@@ -246,7 +246,7 @@ class App extends Component {
     <div id="app">
       <div id="gamecontainer">
         <div className="titleheader">Grass Invaders</div>
-        <Scoreboard score={this.state.score} />
+        <Score score={this.state.score} />
         <Grid
           rows={this.rows}
           cols={this.cols}
