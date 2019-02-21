@@ -4,7 +4,7 @@
   "description": "Space Invaders game replica",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "webpack -w",
     "schema": "psql -U grassinvaders -f database/schema.sql",
     "seed": "psql -U grassinvaders -d grassinvaders -f database/seed.sql",
@@ -27,6 +27,8 @@
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "enzyme": "^3.9.0",
+    "jest": "^24.1.0",
     "nodemon": "^1.18.9",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1"
