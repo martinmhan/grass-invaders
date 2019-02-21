@@ -5,10 +5,12 @@ import Score from './Score';
 import Grid from './Grid';
 import ButtonPad from './ButtonPad';
 import Explosion from './Explosion';
+import LeaderboardModal from './LeaderboardModal';
 
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.rows = 18;
     this.cols = 18;
     this.lastLaser = null;
@@ -20,6 +22,7 @@ class App extends Component {
     this.moveEnemiesIntervalms = 325; // ms between enemy movements
     this.addEnemyInterval = null;
     this.moveEnemiesInterval = null;
+
     const grid = [];
     for (let i = 0; i < this.rows; i += 1) {
       const row = [];
@@ -29,7 +32,7 @@ class App extends Component {
 
     this.state = {
       allScores: [],
-      gameState: 'intro', // possible values --> 'intro', 'pre-game', playing', 'game over', + highscores
+      gameState: 'intro', // possible values --> 'intro', 'pre-game', playing', 'game over', + 'leaderboard'
       username: '',
       score: 0,
       gridMatrix: grid,
@@ -38,12 +41,12 @@ class App extends Component {
     };
   }
 
-  componentWillMount = async () => {
-    try {
-      this.resetGame();
-      const allScores = await Axios.get('/api/scores');
-      this.setState({ allScores });
-    } catch (err) { console.error(err); }
+  componentWillMount = () => {
+    console.log('App componentWillMount');
+    this.resetGame();
+    Axios.get('/api/scores')
+      .then((allScores) => { this.setState({ allScores }); })
+      .catch((err) => { console.error(err); });
   };
 
   startGame = () => {
@@ -57,17 +60,16 @@ class App extends Component {
     }
   };
 
-  endGame = async () => {
-    try {
-      const { username, score } = this.state;
+  endGame = () => {
+    const { username, score } = this.state;
 
-      clearInterval(this.addEnemyInterval);
-      clearInterval(this.moveEnemiesInterval);
-      this.setState({ gameState: 'game over' });
-      await Axios.post('/api/scores', { username, score });
-      const allScores = await Axios.get('/api/scores');
-      this.setState({ allScores });
-    } catch (err) { console.error(err); }
+    clearInterval(this.addEnemyInterval);
+    clearInterval(this.moveEnemiesInterval);
+    this.setState({ gameState: 'game over' });
+    Axios.post('/api/scores', { username, score })
+      .then(() => Axios.get('/api/scores'))
+      .then((allScores) => { this.setState({ allScores }); })
+      .catch((err) => { console.error(err); });
   };
 
   resetGame = () => {
@@ -244,6 +246,10 @@ class App extends Component {
 
   render = () => (
     <div id="app">
+      { this.state.gameState === 'leaderboard'
+        ? <LeaderboardModal allScores={this.state.allScores} />
+        : null
+      }
       <div id="gamecontainer">
         <div className="titleheader">Grass Invaders</div>
         <Score score={this.state.score} />
