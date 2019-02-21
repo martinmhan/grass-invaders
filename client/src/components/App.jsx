@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Axios from 'axios';
 import Score from './Score';
-import Grid from './Grid';
+import Grid from './grid/Grid';
 import ButtonPad from './ButtonPad';
-import Explosion from './Explosion';
-import LeaderboardModal from './LeaderboardModal';
+import Explosion from './grid/Explosion';
+import LeaderboardModal from './modals/LeaderboardModal';
 
 class App extends Component {
   constructor(props) {
@@ -42,7 +42,6 @@ class App extends Component {
   }
 
   componentWillMount = () => {
-    console.log('App componentWillMount');
     this.resetGame();
     Axios.get('/api/scores')
       .then((allScores) => { this.setState({ allScores }); })

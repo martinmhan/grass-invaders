@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Row from './Row';
-import IntroModal from './IntroModal';
-import GameOverModal from './GameOverModal';
+import IntroModal from '../modals/IntroModal';
+import GameOverModal from '../modals/GameOverModal';
 
 const Grid = props => (
   <div className="grid" tabIndex="0" onKeyDown={props.handleKeyDown}>
