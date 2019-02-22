@@ -16,7 +16,7 @@ const Row = ({ rowArr, row }) => (
 );
 
 Row.propTypes = {
-  rowArr: PropTypes.arrayOf(PropTypes.string).isRequired,
+  rowArr: PropTypes.arrayOf(PropTypes.any).isRequired,
   row: PropTypes.number.isRequired,
 };
 

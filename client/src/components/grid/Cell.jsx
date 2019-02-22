@@ -19,10 +19,16 @@ const Cell = props => (
   </div>
 );
 
+Cell.defaultProps = {
+  cell: null,
+  row: null,
+  col: null,
+};
+
 Cell.propTypes = {
-  cell: PropTypes.string.isRequired,
-  row: PropTypes.number.isRequired,
-  col: PropTypes.number.isRequired,
+  cell: PropTypes.string,
+  row: PropTypes.number,
+  col: PropTypes.number,
 };
 
 export default Cell;
