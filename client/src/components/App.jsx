@@ -32,7 +32,7 @@ class App extends Component {
 
     this.state = {
       allScores: [],
-      gameState: 'intro', // possible values --> 'intro', 'pre-game', playing', 'game over', + 'leaderboard'
+      gameState: 'intro', // possible values --> 'intro', 'pre-game', playing', 'game over', 'leaderboard'
       username: '',
       score: 0,
       gridMatrix: grid,
@@ -102,6 +102,10 @@ class App extends Component {
     } else {
       // HANDLE INVALID USERNAME
     }
+  };
+
+  showLeaderboard = () => {
+    this.setState({ gameState: 'leaderboard' });
   };
 
   handleKeyDown = (e) => {
@@ -245,9 +249,10 @@ class App extends Component {
 
   render = () => (
     <div id="app">
-      { this.state.gameState === 'leaderboard'
-        ? <LeaderboardModal allScores={this.state.allScores} />
-        : null
+      {
+        this.state.gameState === 'leaderboard'
+          ? <LeaderboardModal allScores={this.state.allScores} />
+          : null
       }
       <div id="gamecontainer">
         <div className="titleheader">Grass Invaders</div>
@@ -263,6 +268,7 @@ class App extends Component {
         <ButtonPad
           startGame={this.startGame}
           endGame={this.endGame}
+          showLeaderboard={this.showLeaderboard}
           allScores={this.state.allScores}
         />
       </div>
