@@ -44,7 +44,7 @@ class App extends Component {
   componentWillMount = () => {
     this.resetGame();
     Axios.get('/api/scores')
-      .then((allScores) => { this.setState({ allScores }); })
+      .then(({ data }) => { this.setState({ allScores: data }); })
       .catch((err) => { console.error(err); });
   };
 
