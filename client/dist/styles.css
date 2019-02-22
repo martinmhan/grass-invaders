@@ -53,7 +53,7 @@ body {
   outline: none;
 }
 
-.intromodal, .gameovermodal {
+.intromodal, .gameovermodal, .leaderboardmodal {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,6 +96,56 @@ body {
   width: 80%;
   font-size: 40px;
   font-weight: bold;
+}
+
+.leaderboardmodalcontent {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 300px;
+  min-height: 400px;
+  overflow: scroll;
+  border: solid black 1px;
+  border-radius: 5px;
+  padding: 15px 10px 15px 10px;
+  background-color: lightgray;
+}
+
+.leaderboardmodaltop {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.leaderboardclosebtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid black 1px;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  padding: 2px;
+}
+
+.leaderboardclosebtn:focus {
+  outline: 0;
+}
+
+.leaderboardclosebtnmousedown {
+  background-color: darkgray;
+  border-width: 2px;
+  padding: 1px;
+}
+
+.leaderboardclosebtnimg {
+  width: 100%;
+  height: 100%;
+}
+
+.leaderboardheader {
+  display: flex;
+  justify-content: center;
+  margin: 0px;
 }
 
 .row {
@@ -152,7 +202,7 @@ body {
   max-width: 60%;
 }
 
-.startgamebtn, .endgamebtn {
+.startgamebtn, .endgamebtn, .leaderboardbtn {
   font-size: 20px;
   margin: 10px;
 }

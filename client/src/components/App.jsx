@@ -5,7 +5,6 @@ import Score from './Score';
 import Grid from './grid/Grid';
 import ButtonPad from './ButtonPad';
 import Explosion from './grid/Explosion';
-import LeaderboardModal from './modals/LeaderboardModal';
 
 class App extends Component {
   constructor(props) {
@@ -43,8 +42,15 @@ class App extends Component {
 
   componentWillMount = () => {
     this.resetGame();
+    this.getAllScores();
+  };
+
+  getAllScores = () => {
     Axios.get('/api/scores')
-      .then(({ data }) => { this.setState({ allScores: data }); })
+      .then(({ data }) => {
+        data.sort((a, b) => b.score - a.score);
+        this.setState({ allScores: data });
+      })
       .catch((err) => { console.error(err); });
   };
 
@@ -66,8 +72,7 @@ class App extends Component {
     clearInterval(this.moveEnemiesInterval);
     this.setState({ gameState: 'game over' });
     Axios.post('/api/scores', { username, score })
-      .then(() => Axios.get('/api/scores'))
-      .then((allScores) => { this.setState({ allScores }); })
+      .then(() => { this.getAllScores(); })
       .catch((err) => { console.error(err); });
   };
 
@@ -104,8 +109,16 @@ class App extends Component {
     }
   };
 
-  showLeaderboard = () => {
-    this.setState({ gameState: 'leaderboard' });
+  openLeaderboard = () => {
+    const { gameState } = this.state;
+
+    if (!['playing', 'intro'].includes(gameState)) {
+      this.setState({ gameState: 'leaderboard' });
+    }
+  };
+
+  closeLeaderboard = () => {
+    this.setState({ gameState: 'pre-game' });
   };
 
   handleKeyDown = (e) => {
@@ -249,11 +262,6 @@ class App extends Component {
 
   render = () => (
     <div id="app">
-      {
-        this.state.gameState === 'leaderboard'
-          ? <LeaderboardModal allScores={this.state.allScores} />
-          : null
-      }
       <div id="gamecontainer">
         <div className="titleheader">Grass Invaders</div>
         <Score score={this.state.score} />
@@ -264,11 +272,13 @@ class App extends Component {
           handleKeyDown={this.handleKeyDown}
           gridMatrix={this.state.gridMatrix}
           gameState={this.state.gameState}
+          allScores={this.state.allScores}
+          closeLeaderboard={this.closeLeaderboard}
         />
         <ButtonPad
           startGame={this.startGame}
           endGame={this.endGame}
-          showLeaderboard={this.showLeaderboard}
+          openLeaderboard={this.openLeaderboard}
           allScores={this.state.allScores}
         />
       </div>
