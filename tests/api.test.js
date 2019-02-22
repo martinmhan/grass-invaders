@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../server/app');
 const client = require('../database/index');
 
-// disconnect from DB after tests
+afterAll(async () => { await client.end(); });
 
 describe('GET /api/scores', () => {
   beforeEach(() => {
@@ -31,7 +31,7 @@ describe('GET /api/scores', () => {
 describe('POST /api/scores', () => {
   beforeEach(() => { client.query('DELETE FROM scores;'); });
 
-  test('Should insert a new score to the database', async () => {
+  test('Should insert a new score into the database', async () => {
     const username = `testuser${Date.now()}`;
     const score = Math.floor(Math.random() * 10000);
     await request(app).post('/api/scores').send({ username, score });
