@@ -10,15 +10,16 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    // game config variables
     this.rows = 18;
     this.cols = 18;
     this.lastLaser = null;
-    this.msBetweenLasers = 250;
-    this.laserSpeed = 40; // 1 = 1 square per second
-    this.enemyLaserSpeed = 20; // 1 = 1 square per second
-    this.enemyLaserFrequency = 10; // % of enemy movements that result in a laser fired
-    this.addEnemyIntervalms = 1000; // ms between enemies being added to screen
-    this.moveEnemiesIntervalms = 325; // ms between enemy movements
+    this.msBetweenLasers = 250; // (higher = more difficult)
+    this.laserSpeed = 40; // 1 = 1 square per second (lower = more difficult)
+    this.enemyLaserSpeed = 20; // 1 = 1 square per second (higher = more difficult)
+    this.enemyLaserFrequency = 10; // % of enemy movements that result in a laser fired (higher = more difficult)
+    this.addEnemyIntervalms = 1000; // ms between enemies being added to screen (lower = more difficult)
+    this.moveEnemiesIntervalms = 325; // ms between enemy movements (lower = more difficult)
     this.addEnemyInterval = null;
     this.moveEnemiesInterval = null;
 
@@ -51,7 +52,12 @@ class App extends Component {
         data.sort((a, b) => b.score - a.score);
         this.setState({ allScores: data });
       })
-      .catch((err) => { console.error(err); });
+      .catch(err => console.error(err));
+  };
+
+  submitScore = () => {
+    const { username, score } = this.state;
+    return Axios.post('/api/scores', { username, score });
   };
 
   startGame = () => {
@@ -66,14 +72,12 @@ class App extends Component {
   };
 
   endGame = () => {
-    const { username, score } = this.state;
-
     clearInterval(this.addEnemyInterval);
     clearInterval(this.moveEnemiesInterval);
     this.setState({ gameState: 'game over' });
-    Axios.post('/api/scores', { username, score })
-      .then(() => { this.getAllScores(); })
-      .catch((err) => { console.error(err); });
+    this.submitScore()
+      .then(this.getAllScores)
+      .catch(err => console.error(err));
   };
 
   resetGame = () => {
