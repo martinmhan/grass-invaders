@@ -101,9 +101,9 @@ body {
 .leaderboardmodalcontent {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  width: 300px;
+  width: 400px;
   min-height: 400px;
+  max-height: 100%;
   overflow: scroll;
   border: solid black 1px;
   border-radius: 5px;
@@ -114,6 +114,7 @@ body {
 .leaderboardmodaltop {
   display: flex;
   flex-direction: row-reverse;
+  width: 100%;
 }
 
 .leaderboardclosebtn {
@@ -145,7 +146,36 @@ body {
 .leaderboardheader {
   display: flex;
   justify-content: center;
-  margin: 0px;
+  margin: 0px 0px 5px 0px;
+}
+
+.leaderboardmodallist {
+  display: flex;
+  flex-direction: column;
+}
+
+.leaderboardentry {
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 0px 2px 0px;
+}
+
+.leaderboardscore {
+  width: 33%;
+}
+
+.leaderboardusername {
+  width: 33%;
+}
+
+.leaderboarddate {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 33%;
+}
+
+.leaderboardentry {
+  display: flex;
 }
 
 .row {
