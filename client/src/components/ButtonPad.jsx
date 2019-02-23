@@ -1,10 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const ButtonPad = (props) => (
+const ButtonPad = ({ startGame, endGame, openLeaderboard }) => (
   <div className="buttonpad">
-    <button className="startgamebtn" onClick={props.startGame}>Start Game</button>
-    <button className="endgamebtn" onClick={props.endGame}>End Game</button>
+    <button type="button" className="startgamebtn" onClick={startGame}>Start Game</button>
+    {/* <button type="button" className="endgamebtn" onClick={endGame}>End Game</button> */}
+    <button type="button" className="leaderboardbtn" onClick={openLeaderboard}>High Scores</button>
   </div>
 );
+
+ButtonPad.propTypes = {
+  startGame: PropTypes.func.isRequired,
+  endGame: PropTypes.func.isRequired,
+  openLeaderboard: PropTypes.func.isRequired,
+};
 
 export default ButtonPad;
