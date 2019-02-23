@@ -103,8 +103,7 @@ body {
   flex-direction: column;
   width: 400px;
   min-height: 400px;
-  max-height: 100%;
-  overflow: scroll;
+  max-height: 90%;
   border: solid black 1px;
   border-radius: 5px;
   padding: 15px 10px 15px 10px;
@@ -149,33 +148,34 @@ body {
   margin: 0px 0px 5px 0px;
 }
 
-.leaderboardmodallist {
+.leaderboardlist {
   display: flex;
   flex-direction: column;
+  overflow: scroll;
+}
+
+.leaderboardentry, .leaderboardlistheader{
+  display: flex;
+  justify-content: space-between;
 }
 
 .leaderboardentry {
-  display: flex;
-  justify-content: space-between;
-  margin: 2px 0px 2px 0px;
+  margin: 1px 0px 1px 0px;
+  min-height: max-content
 }
 
-.leaderboardscore {
-  width: 33%;
+.leaderboardlistheader {
+  margin: 10px 0px 10px 0px;
 }
 
-.leaderboardusername {
+.leaderboardscore, .leaderboardusername, .leaderboarddate {
   width: 33%;
+  height: 100%;
 }
 
 .leaderboarddate {
   display: flex;
   flex-direction: row-reverse;
-  width: 33%;
-}
-
-.leaderboardentry {
-  display: flex;
 }
 
 .row {
