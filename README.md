@@ -1,17 +1,16 @@
 # Description
-This is a small side-project I built during my time at Hack Reactor using purely React for the front-end. The app itself is a simple Space Invaders replica where you control a ship and shoot at monsters while they chase and shoot at you (and view others' high scores). However, this was an opportunity for me to implement some deployment best practices such as testing with Enzyme/Jest and Continuous Integration with Travis CI.
+Grass Invaders is a full-stack replica of the classic Space Invaders game. My version of the game itself is fairly simple - you control a ship and shoot at monsters while they chase and shoot at you.
 
-Technical Stack:
+## Technical Stack:
   - Development: PostgreSQL | Express | React | Node.js
-  - Testing: Jest | Enzyme | Travis CI
-  - Deployment: Docker | EC2 | S3
+  - Testing: Jest | Supertest
 
-# GIF Demos
+# Demos
 - Gameplay: https://s3-us-west-1.amazonaws.com/gitbuckets/grass-invaders/gifs/grass_invaders.gif
-- Leaderboard: ...
 
 # Setup
 Run the following, then open 'localhost:3000' in the Chrome browser.
+** Must have PostgreSQL set up with a database named "grassinvaders". See npm scripts for schema build
   ```
   npm install
   npm run build
