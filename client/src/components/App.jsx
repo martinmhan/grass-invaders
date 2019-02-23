@@ -72,12 +72,14 @@ class App extends Component {
   };
 
   endGame = () => {
-    clearInterval(this.addEnemyInterval);
-    clearInterval(this.moveEnemiesInterval);
-    this.setState({ gameState: 'game over' });
-    this.submitScore()
-      .then(this.getAllScores)
-      .catch(err => console.error(err));
+    if (this.state.game !== 'game over') {
+      this.setState({ gameState: 'game over' });
+      clearInterval(this.addEnemyInterval);
+      clearInterval(this.moveEnemiesInterval);
+      this.submitScore()
+        .then(this.getAllScores)
+        .catch(err => console.error(err));
+    }
   };
 
   resetGame = () => {
