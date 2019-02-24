@@ -6,7 +6,7 @@ const LeaderboardEntry = ({ score }) => (
   <div className="leaderboardentry">
     <div className="leaderboardscore">{score.score}</div>
     <div className="leaderboardusername">{score.username}</div>
-    <div className="leaderboarddate">{format(score.score_date, 'MM-DD-YYYY')}</div>
+    <div className="leaderboarddate">{format(score.score_date, 'M-D-YYYY')}</div>
   </div>
 );
 

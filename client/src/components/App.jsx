@@ -283,9 +283,7 @@ class App extends Component {
         />
         <ButtonPad
           startGame={this.startGame}
-          endGame={this.endGame}
           openLeaderboard={this.openLeaderboard}
-          allScores={this.state.allScores}
         />
       </div>
     </div>
