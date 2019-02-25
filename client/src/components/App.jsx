@@ -267,8 +267,8 @@ class App extends Component {
   };
 
   render = () => (
-    <div id="app">
-      <div id="gamecontainer">
+    <div className="app">
+      <div className="gamecontainer">
         <div className="titleheader">Grass Invaders</div>
         <Score score={this.state.score} />
         <Grid
