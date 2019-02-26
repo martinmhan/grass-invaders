@@ -7,6 +7,8 @@ import ButtonPad from '../client/src/components/ButtonPad';
 
 describe('App', () => {
   it('should render without throwing an error', () => {
-    expect(shallow(<App />).contains(<div className="app" />)).toBe(true);
+    const AppWrapper = shallow(<App />);
+    expect(AppWrapper).toMatchSnapshot();
+    expect(AppWrapper.hasClass('app')).toBe(true);
   });
 });
