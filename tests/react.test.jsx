@@ -10,21 +10,17 @@ beforeAll(async () => { AppWrapper = await mount(<App />); });
 
 describe('<App />', () => {
   it('should render without throwing an error', async () => {
-    try {
-      await AppWrapper;
+    await AppWrapper;
 
-      expect(AppWrapper).toMatchSnapshot();
-      expect(AppWrapper.find('.app').length).toBe(1);
-    } catch (err) { console.error(err); }
+    expect(AppWrapper).toMatchSnapshot();
+    expect(AppWrapper.find('.app').length).toBe(1);
   });
 
   it('should render the gamecontainer and titleheader divs', async () => {
-    try {
-      await AppWrapper;
+    await AppWrapper;
 
-      expect(AppWrapper.find('.gamecontainer').length).toBe(1);
-      expect(AppWrapper.find('.titleheader').length).toBe(1);
-    } catch (err) { console.error(err); }
+    expect(AppWrapper.find('.gamecontainer').length).toBe(1);
+    expect(AppWrapper.find('.titleheader').length).toBe(1);
   });
 });
 
@@ -33,23 +29,20 @@ describe('<Grid />', () => {
 
   beforeAll(async () => {
     await AppWrapper;
-    GridWrapper = AppWrapper.find('.grid');
+    GridWrapper = AppWrapper.find('Grid');
   });
 
   it('should render without throwing an error', async () => {
-    try {
-      expect(GridWrapper).toMatchSnapshot();
-      expect((GridWrapper).find('.grid').length).toBe(1);
-    } catch (err) { console.error('grid render error', err); }
+    expect(GridWrapper).toMatchSnapshot();
+    expect((GridWrapper).find('.grid').length).toBe(1);
   });
 
   it('should render the intro modal on initial gameState render of intro', async () => {
-    try {
-      expect(GridWrapper.find('.intromodal').length).toBe(1);
-    } catch (err) { console.error('intro modal render error: ', err); }
+    expect(GridWrapper.find('.intromodal').length).toBe(1);
   });
 
-  // it('should unmount the intro modal upon entering a username and clicking Let\'s play', () => {
-
-  // });
+  it('should change App\'s gameState upon invoking letsPlay', async () => {
+    GridWrapper.props().letsPlay('testusername');
+    expect(AppWrapper.state('gameState')).toBe('pre-game');
+  });
 });
