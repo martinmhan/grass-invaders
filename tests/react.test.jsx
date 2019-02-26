@@ -39,8 +39,10 @@ describe('<Grid />', () => {
     expect(GridWrapper.find('.intromodal').length).toBe(1);
   });
 
-  it('should change App\'s gameState upon invoking letsPlay', async () => {
+  it('should unmount the intro modal upon invoking letsPlay', async () => {
     GridWrapper.props().letsPlay('testusername');
+    AppWrapper.update();
     expect(AppWrapper.state('gameState')).toBe('pre-game');
+    expect(AppWrapper.find('.intromodal').length).toBe(0);
   });
 });
