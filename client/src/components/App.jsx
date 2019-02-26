@@ -111,7 +111,7 @@ class App extends Component {
     if (username.length > 0) {
       this.setState({ username, gameState: 'pre-game' });
     } else {
-      // HANDLE INVALID USERNAME
+      // TODO: HANDLE INVALID USERNAME INPUTS
     }
   };
 
