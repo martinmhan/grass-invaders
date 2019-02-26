@@ -29,7 +29,7 @@ describe('<Grid />', () => {
 
   beforeAll(async () => {
     await AppWrapper;
-    GridWrapper = AppWrapper.find('.grid');
+    GridWrapper = AppWrapper.find('Grid');
   });
 
   it('should render without throwing an error', async () => {
@@ -41,9 +41,8 @@ describe('<Grid />', () => {
     expect(GridWrapper.find('.intromodal').length).toBe(1);
   });
 
-  it('should unmount the intro modal upon entering a username and clicking Let\'s play', async () => {
-    GridWrapper.find('.usernameinput').instance().value = 'testusername';
-    GridWrapper.find('.letsplaybtn').simulate('click');
+  it('should change App\'s gameState upon invoking letsPlay', async () => {
+    GridWrapper.props().letsPlay('testusername');
     expect(AppWrapper.state('gameState')).toBe('pre-game');
   });
 });
