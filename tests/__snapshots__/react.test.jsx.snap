@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App should render without throwing an error 1`] = `ShallowWrapper {}`;
+exports[`<App /> should render without throwing an error 1`] = `ReactWrapper {}`;
+
+exports[`<Grid /> should render without throwing an error 1`] = `ReactWrapper {}`;
