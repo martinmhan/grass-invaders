@@ -267,8 +267,8 @@ class App extends Component {
   };
 
   render = () => (
-    <div id="app">
-      <div id="gamecontainer">
+    <div className="app">
+      <div className="gamecontainer">
         <div className="titleheader">Grass Invaders</div>
         <Score score={this.state.score} />
         <Grid
@@ -283,9 +283,7 @@ class App extends Component {
         />
         <ButtonPad
           startGame={this.startGame}
-          endGame={this.endGame}
           openLeaderboard={this.openLeaderboard}
-          allScores={this.state.allScores}
         />
       </div>
     </div>

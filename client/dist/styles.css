@@ -3,7 +3,7 @@ body {
   margin: 0px;
 }
 
-#app {
+.app {
   display: flex;
   justify-content: center;
   background-color: papayawhip;
@@ -19,7 +19,7 @@ body {
   margin: 10px;
 }
 
-#gamecontainer {
+.gamecontainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
