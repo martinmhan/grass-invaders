@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --detectOpenHandles",
-    "build": "webpack -w",
+    "build:dev": "webpack -w --env.NODE_ENV=dev --progress",
+    "build:prod": "webpack --env.NODE_ENV=prod",
     "schema": "psql -U grassinvaders -f database/schema.sql",
     "seed": "psql -U grassinvaders -d grassinvaders -f database/seed.sql",
-    "start-dev": "nodemon server/index.js"
+    "start:dev": "nodemon server/index.js",
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
