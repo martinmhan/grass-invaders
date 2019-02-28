@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --detectOpenHandles",
-    "build": "webpack -w",
+    "build:dev": "webpack -w --env.NODE_ENV=development --progress",
+    "build:prod": "webpack --env.NODE_ENV=production",
     "schema": "psql -U grassinvaders -f database/schema.sql",
     "seed": "psql -U grassinvaders -d grassinvaders -f database/seed.sql",
-    "start-dev": "nodemon server/index.js"
+    "start:dev": "nodemon server/index.js",
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,6 @@
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-class-properties": "^7.3.3",
-    "babel-plugin-transform-export-extensions": "^6.22.0",
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
