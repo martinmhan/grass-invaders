@@ -1,12 +1,14 @@
 # Description
-Grass Invaders is a full-stack replica of the classic Space Invaders game. The app itself is fairly simple - you control a ship and shoot at monsters while they chase and shoot at you, and the game ends when a monster touches or hits you with a laser. Scores are saved into a SQL database and can be retrieved to view all-time high scores.
+Grass Invaders is a full-stack replica of the classic Space Invaders game. The app itself is fairly simple - you control a ship and shoot at monsters while they chase and shoot at you, and the game ends when a monster touches or hits you with a laser. High scores are sent to and retrieved from a SQL database via a REST API.
 
-# Technical Stack:
+Technical Stack:
   - Development: PostgreSQL | Express | React | Node.js
   - Testing: Jest | Supertest | Enzyme
 
 # Demos
-- Gameplay: https://s3-us-west-1.amazonaws.com/gitbuckets/grass-invaders/gifs/grass_invaders.gif
+- Startup: https://s3-us-west-1.amazonaws.com/gitbuckets/grass-invaders/gifs/grass-invaders-startup.gif
+- Gameplay: https://s3-us-west-1.amazonaws.com/gitbuckets/grass-invaders/gifs/grass-invaders-gameplay.gif
+- High Scores: https://s3-us-west-1.amazonaws.com/gitbuckets/grass-invaders/gifs/grass-invaders-highscore.gif
 
 # Setup
 Run the following, then open 'localhost:3000' in the Chrome browser.
