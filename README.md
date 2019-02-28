@@ -1,7 +1,7 @@
 # Description
 Grass Invaders is a full-stack replica of the classic Space Invaders game. The app itself is fairly simple - you control a ship and shoot at monsters while they chase and shoot at you, and the game ends when a monster touches or hits you with a laser. This was, however, an exercise to implement some deployment best practices such as continuous integration testing.
 
-## Technical Stack:
+# Technical Stack:
   - Development: PostgreSQL | Express | React | Node.js
   - Testing: Jest | Supertest | Enzyme
 
