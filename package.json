@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --detectOpenHandles",
-    "build:dev": "webpack -w --env.NODE_ENV=dev --progress",
-    "build:prod": "webpack --env.NODE_ENV=prod",
+    "build:dev": "webpack -w --env.NODE_ENV=development --progress",
+    "build:prod": "webpack --env.NODE_ENV=production",
     "schema": "psql -U grassinvaders -f database/schema.sql",
     "seed": "psql -U grassinvaders -d grassinvaders -f database/seed.sql",
     "start:dev": "nodemon server/index.js",
