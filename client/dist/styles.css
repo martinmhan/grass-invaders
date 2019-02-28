@@ -192,6 +192,12 @@ body {
   width: 100%;
 }
 
+.cellspace {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .ship {
   display: flex;
   align-items: center;
@@ -225,6 +231,12 @@ body {
 .enemyimg {
   max-height: 80%;
   max-width: 60%;
+}
+
+.explosion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .explosionimg {

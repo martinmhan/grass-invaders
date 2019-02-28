@@ -25,9 +25,7 @@ class App extends Component {
 
     const grid = [];
     for (let i = 0; i < this.rows; i += 1) {
-      const row = [];
-      for (let j = 0; j < this.cols; j += 1) { row.push(null); }
-      grid.push(row);
+      grid[i] = new Array(this.cols).fill(null);
     }
 
     this.state = {
@@ -254,6 +252,8 @@ class App extends Component {
       } else {
         if (nextCell === 'ship') {
           const cellDiv = document.getElementById(`r${row + 1}c${col}`);
+          const shipDiv = document.getElementsByClassName('ship')[0];
+          shipDiv.parentNode.removeChild(shipDiv);
           ReactDOM.render(<Explosion />, cellDiv);
           this.endGame();
         }
