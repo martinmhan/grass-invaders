@@ -1,0 +1,16 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB="grassinvaders"
+      - POSTGRES_USER="martinhan"
+      - POSTGRES_PASSWORD="password"
+  api:
+    build: martinmhan/grass-invaders
+    depends_on:
+      -db
+    ports:
+      -"3000:3000"
