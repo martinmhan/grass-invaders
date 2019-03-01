@@ -14,7 +14,7 @@ Technical Stack:
 Run the following, then open 'localhost:3000' in the Chrome browser.
 ** Must have PostgreSQL set up with a database named "grassinvaders". See npm scripts for schema build
   ```
-  npm install
-  npm run build
-  npm run start-dev
+  npm i
+  npm run build:dev
+  npm run start:dev
   ``` 
