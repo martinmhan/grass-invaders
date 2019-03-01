@@ -9,7 +9,7 @@ services:
       - POSTGRES_USER="grassinvaders"
       - POSTGRES_PASSWORD="password"
   api:
-    build: martinmhan/grass-invaders
+    build: martinmhan/grass-invaders-prod
     depends_on:
       -db
     ports:
