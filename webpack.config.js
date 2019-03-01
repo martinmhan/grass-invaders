@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = env => (
   {
     mode: env.NODE_ENV,
-    entry: './client/src/index.jsx',
+    entry: ['@babel/polyfill', './client/src/index.jsx'],
     output: {
       path: path.join(__dirname, '/client/dist'),
       filename: 'bundle.js',
