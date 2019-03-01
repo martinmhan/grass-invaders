@@ -13,5 +13,11 @@ services:
     image: martinmhan/grass-invaders-prod
     depends_on:
       - db
+    links:
+      - db
+    environment:
+      POSTGRES_DB: grassinvaders
+      POSTGRES_USER: grassinvaders
+      POSTGRES_PASSWORD: password
     ports:
       - "3000:3000"
