@@ -1,8 +1,8 @@
 const request = require('supertest');
 const app = require('../server/app');
-const client = require('../database/index');
+const pool = require('../database/index');
 
-afterAll(async () => { await client.end(); });
+afterAll(async () => { await pool.end(); });
 
 describe('GET /api/scores', () => {
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('GET /api/scores', () => {
     const score = 100;
     const scoreDate = new Date().toISOString().slice(0, 10);
     const query = `INSERT INTO scores (username, score, score_date) VALUES ('${username}', ${score}, '${scoreDate}');`;
-    client.query(query);
+    pool.query(query);
   });
 
   test('Should respond with an array of objects with user data', async () => {
@@ -29,8 +29,8 @@ describe('GET /api/scores', () => {
 });
 
 describe('POST /api/scores', () => {
-  beforeEach(() => { client.query('DELETE FROM scores;'); });
-  afterEach(() => { client.query('DELETE FROM scores;'); });
+  beforeEach(() => { pool.query('DELETE FROM scores;'); });
+  afterEach(() => { pool.query('DELETE FROM scores;'); });
 
   test('Should insert a new score into the database', async () => {
     const username = `testuser${Date.now()}`;
