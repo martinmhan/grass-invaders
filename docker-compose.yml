@@ -11,6 +11,6 @@ services:
   api:
     image: martinmhan/grass-invaders-prod
     depends_on:
-      -db
+      - db
     ports:
       - "3000:3000"
