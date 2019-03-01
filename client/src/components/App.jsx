@@ -44,18 +44,19 @@ class App extends Component {
     this.getAllScores();
   };
 
-  getAllScores = () => {
-    Axios.get('/api/scores')
-      .then(({ data }) => {
-        data.sort((a, b) => b.score - a.score);
-        this.setState({ allScores: data });
-      })
-      .catch(err => console.error(err));
+  getAllScores = async () => {
+    try {
+      const { data } = await Axios.get('http://54.174.134.162:3000/api/scores');
+      data.sort((a, b) => b.score - a.score);
+      this.setState({ allScores: data });
+    } catch (err) { console.error(err); }
   };
 
-  submitScore = () => {
-    const { username, score } = this.state;
-    return Axios.post('/api/scores', { username, score });
+  submitScore = async () => {
+    try {
+      const { username, score } = this.state;
+      Axios.post('http://54.174.134.162:3000/api/scores', { username, score });
+    } catch (err) { console.error(err); }
   };
 
   startGame = () => {
@@ -69,15 +70,16 @@ class App extends Component {
     }
   };
 
-  endGame = () => {
-    if (this.state.game !== 'game over') {
-      this.setState({ gameState: 'game over' });
-      clearInterval(this.addEnemyInterval);
-      clearInterval(this.moveEnemiesInterval);
-      this.submitScore()
-        .then(this.getAllScores)
-        .catch(err => console.error(err));
-    }
+  endGame = async () => {
+    try {
+      if (this.state.game !== 'game over') {
+        this.setState({ gameState: 'game over' });
+        clearInterval(this.addEnemyInterval);
+        clearInterval(this.moveEnemiesInterval);
+        await this.submitScore();
+        this.getAllScores();
+      }
+    } catch (err) { console.error(err); }
   };
 
   resetGame = () => {

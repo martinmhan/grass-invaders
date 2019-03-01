@@ -4,6 +4,7 @@ module.exports = {
   getScores: async (req, res) => {
     try {
       const { rows } = await selectScores();
+      console.log(rows);
       res.status(200).send(rows);
     } catch (err) {
       res.status(404).send(err);
