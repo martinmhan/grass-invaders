@@ -5,6 +5,7 @@ import Score from './Score';
 import Grid from './grid/Grid';
 import ButtonPad from './ButtonPad';
 import Explosion from './grid/Explosion';
+import { endpoint } from '../vars';
 
 class App extends Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class App extends Component {
   };
 
   getAllScores = () => {
-    Axios.get('/api/scores')
+    Axios.get(`${endpoint}/api/scores`)
       .then(({ data }) => {
         data.sort((a, b) => b.score - a.score);
         this.setState({ allScores: data });
@@ -55,7 +56,7 @@ class App extends Component {
 
   submitScore = () => {
     const { username, score } = this.state;
-    return Axios.post('/api/scores', { username, score });
+    return Axios.post(`${endpoint}/api/scores`, { username, score });
   };
 
   startGame = () => {
