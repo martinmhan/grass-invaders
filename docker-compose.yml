@@ -6,9 +6,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_DB: grassinvaders
-      - POSTGRES_USER: grassinvaders
-      - POSTGRES_PASSWORD: password
+      POSTGRES_DB: grassinvaders
+      POSTGRES_USER: grassinvaders
+      POSTGRES_PASSWORD: password
   api:
     image: martinmhan/grass-invaders-prod
     depends_on:
