@@ -254,8 +254,7 @@ class App extends Component {
       } else {
         if (nextCell === 'ship') {
           const cellDiv = document.getElementById(`r${row + 1}c${col}`);
-          const shipDiv = document.getElementsByClassName('ship')[0];
-          shipDiv.parentNode.removeChild(shipDiv);
+          gridMatrix[row + 1][col] = null;
           ReactDOM.render(<Explosion />, cellDiv);
           this.endGame();
         }
