@@ -9,7 +9,7 @@
     "build:prod": "webpack --env.NODE_ENV=production",
     "schema": "psql -U grassinvaders -f database/schema.sql",
     "start:dev": "nodemon server/index.js",
-    "start": "node server/index.js"
+    "start": "pm2-runtime server/index.js"
   },
   "repository": {
     "type": "git",
