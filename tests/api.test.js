@@ -32,11 +32,12 @@ describe('GET /api/scores', () => {
 });
 
 describe('POST /api/scores', () => {
-  beforeEach(() => { client.query('DELETE FROM scores;'); });
-  afterEach(() => { client.query('DELETE FROM scores;'); });
+  let username;
+
+  afterEach(() => { client.query(`DELETE FROM scores WHERE username = ${username};`); });
 
   test('Should insert a new score into the database', async () => {
-    const username = `testuser${Date.now()}`;
+    username = `testuser${Date.now()}`;
     const score = Math.floor(Math.random() * 10000);
     await request(app).post('/api/scores').send({ username, score });
 
