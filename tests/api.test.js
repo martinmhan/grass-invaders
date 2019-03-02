@@ -4,7 +4,14 @@ const pool = require('../database/index');
 
 let client;
 
-beforeAll(async () => { client = await pool.connect(); });
+beforeAll(async () => {
+  try {
+    client = await pool.connect();
+  } catch (err) {
+    console.error(err);
+  }
+});
+
 afterAll(async () => {
   try {
     await client.release();
@@ -41,7 +48,13 @@ describe('GET /api/scores', () => {
 describe('POST /api/scores', () => {
   let username;
 
-  afterEach(() => { client.query(`DELETE FROM scores WHERE username = '${username}';`); });
+  afterEach(async () => {
+    try {
+      client.query(`DELETE FROM scores WHERE username = '${username}';`);
+    } catch (err) {
+      console.error(err);
+    }
+  });
 
   test('Should insert a new score into the database', async () => {
     username = `testuser${Date.now()}`;
