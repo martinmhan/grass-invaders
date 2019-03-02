@@ -6,8 +6,12 @@ let client;
 
 beforeAll(async () => { client = await pool.connect(); });
 afterAll(async () => {
-  await client.release();
-  pool.end();
+  try {
+    await client.release();
+    await pool.end();
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 describe('GET /api/scores', () => {
