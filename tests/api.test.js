@@ -54,7 +54,7 @@ describe('POST /api/scores', () => {
 
   afterEach(async () => {
     try {
-      client.query(`DELETE FROM scores WHERE username = '${username}';`);
+      return client.query(`DELETE FROM scores WHERE username = '${username}';`);
     } catch (err) {
       console.error(err);
     }
