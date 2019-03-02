@@ -15,7 +15,7 @@ beforeAll(async () => {
 afterAll(async () => {
   try {
     await client.release();
-    await pool.end();
+    return await pool.end();
   } catch (err) {
     console.error(err);
   }
