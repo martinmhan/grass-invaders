@@ -5,10 +5,7 @@ const pool = require('../database/index');
 let client;
 
 beforeAll(async () => { client = await pool.connect(); });
-afterAll(async () => {
-  await client.release();
-  await pool.end();
-});
+afterAll(() => { pool.end(); });
 
 describe('GET /api/scores', () => {
   beforeEach(() => {
