@@ -34,7 +34,7 @@ describe('GET /api/scores', () => {
 describe('POST /api/scores', () => {
   let username;
 
-  afterEach(() => { client.query(`DELETE FROM scores WHERE username = ${username};`); });
+  afterEach(() => { client.query(`DELETE FROM scores WHERE username = '${username}';`); });
 
   test('Should insert a new score into the database', async () => {
     username = `testuser${Date.now()}`;
