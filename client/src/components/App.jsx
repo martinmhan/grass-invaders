@@ -55,7 +55,7 @@ class App extends Component {
   submitScore = async () => {
     try {
       const { username, score } = this.state;
-      Axios.post('http://54.174.134.162:3000/api/scores', { username, score });
+      return Axios.post('http://54.174.134.162:3000/api/scores', { username, score });
     } catch (err) { console.error(err); }
   };
 
