@@ -4,7 +4,7 @@ Grass Invaders is a full-stack replica of the classic Space Invaders game. The a
 Technical Stack:
   - Development: PostgreSQL | Express | React | Node.js
   - Testing: Jest | Supertest | Enzyme | Travis CI
-  - Deployment: Docker | EC2 | S3 | PM2
+  - Deployment: Docker Compose | EC2 | S3 | PM2
 
 # Demos
 - Startup: https://s3-us-west-1.amazonaws.com/gitbuckets/grass-invaders/gifs/grass-invaders-startup.gif
