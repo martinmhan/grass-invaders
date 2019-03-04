@@ -46,7 +46,7 @@ class App extends Component {
 
   getAllScores = async () => {
     try {
-      const { data } = await Axios.get('http://54.174.134.162:3000/api/scores');
+      const { data } = await Axios.get('/api/scores');
       data.sort((a, b) => b.score - a.score);
       this.setState({ allScores: data });
     } catch (err) { console.error(err); }
@@ -55,7 +55,7 @@ class App extends Component {
   submitScore = async () => {
     try {
       const { username, score } = this.state;
-      return Axios.post('http://54.174.134.162:3000/api/scores', { username, score });
+      return Axios.post('/api/scores', { username, score });
     } catch (err) { console.error(err); }
   };
 

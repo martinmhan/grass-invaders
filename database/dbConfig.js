@@ -1,6 +1,6 @@
 module.exports = {
   user: 'grassinvaders',
-  host: '54.174.134.162',
+  host: 'localhost',
   database: 'grassinvaders',
   password: 'password',
   port: 5432,
