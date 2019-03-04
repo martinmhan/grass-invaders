@@ -31,7 +31,7 @@ describe('GET /api/scores', () => {
   });
 
   afterEach(() => {
-    const query = 'DELETE FROM scores WHERE username = "testusername";';
+    const query = 'DELETE FROM scores WHERE username = \'testusername\';';
     client.query(query);
   });
 
