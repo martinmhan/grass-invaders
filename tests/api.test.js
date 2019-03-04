@@ -30,6 +30,11 @@ describe('GET /api/scores', () => {
     client.query(query);
   });
 
+  afterEach(() => {
+    const query = 'DELETE FROM scores WHERE username = "testusername";';
+    client.query(query);
+  });
+
   test('Should respond with an array of objects with user data', async () => {
     try {
       const { body, statusCode } = await request(app).get('/api/scores');
