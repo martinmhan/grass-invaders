@@ -34,7 +34,7 @@ describe('GET /api/scores', () => {
     try {
       return client.query('DELETE FROM scores WHERE username = \'testusername\';');
     } catch (err) {
-      console.error(err);
+      return console.error(err);
     }
   });
 
@@ -64,7 +64,7 @@ describe('POST /api/scores', () => {
     try {
       return client.query(`DELETE FROM scores WHERE username = '${username}';`);
     } catch (err) {
-      console.error(err);
+      return console.error(err);
     }
   });
 
