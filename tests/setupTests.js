@@ -1,5 +1,5 @@
 const { configure } = require('enzyme');
 const Adapter = require('enzyme-adapter-react-16');
-require('@babel/polyfill'); // enables async await in react code
+require('@babel/polyfill');
 
 configure({ adapter: new Adapter() });

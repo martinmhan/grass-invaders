@@ -1,4 +1,4 @@
-const { selectScores, insertScore } = require('../database/dbHelpers.js');
+const { selectScores, insertScore } = require('../database/helpers.js');
 
 module.exports = {
   getScores: async (req, res) => {
