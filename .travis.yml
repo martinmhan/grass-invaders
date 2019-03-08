@@ -2,7 +2,7 @@ services:
   - postgresql
 before_script:
   - psql -c "CREATE DATABASE grassinvaders;" -U postgres
-  - psql -U postgres -d grassinvaders -f ../database/schema.sql
+  - psql -U postgres -d grassinvaders -f database/schema.sql
 language: node_js
 node_js:
   - 10
