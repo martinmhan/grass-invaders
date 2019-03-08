@@ -2,7 +2,7 @@ services:
   - postgresql
 before_script:
   - psql -c "CREATE DATABASE grassinvaders;" -U postgres
-  - psql -c "CREATE ROLE grassinvaders WITH PASSWORD '' SUPERUSER"; -U postgres
+  - psql -c "CREATE ROLE grassinvaders WITH PASSWORD '' SUPERUSER;" -U postgres
   - psql -U grassinvaders -d grassinvaders -f ../database/schema.sql
 language: node_js
 node_js:
